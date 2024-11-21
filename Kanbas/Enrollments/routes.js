@@ -7,13 +7,7 @@ export default function EnrollmentRoutes(app) {
   });
   app.delete("/api/enrollments/:userId/:courseId", async (req, res) => {
     const { userId, courseId } = req.params;
-    console.log("COURSE AND USER ID FOR BACKEND", userId, courseId);
-    const status = await enrollmentsDao.unenrollUserInCourse(
-      userId,
-      courseId,
-      res
-    );
-    console.log("STATUs", status);
+    const status = await enrollmentsDao.unenrollUserInCourse(userId, courseId);
     res.send(status);
   });
 }

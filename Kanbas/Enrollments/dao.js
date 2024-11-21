@@ -3,19 +3,17 @@ export function enrollUserInCourse(userId, courseId) {
   const { enrollments } = Database;
   enrollments.push({ _id: Date.now(), user: userId, course: courseId });
 }
-export function unenrollUserInCourse(userId, courseId, res) {
+export function unenrollUserInCourse(userId, courseId) {
   const { enrollments } = Database;
   const idx = enrollments.findIndex(
     (enrollment) => enrollment.user === userId && enrollment.course === courseId
   );
-  console.log("IDX", idx);
   if (idx === -1) {
-    return res.status(404);
+    return { status: 404, message: "Enrollment not found" };
   }
   Database.enrollments = enrollments.filter(
     (enrollment) =>
       !(enrollment.user === userId && enrollment.course === courseId)
   );
-  console.log("RESULT", Database.enrollments);
-  return res.status(200);
+  return { status: 200, message: "Unenrolled successfully" };
 }
