@@ -4,7 +4,7 @@ export function getUserEnrollments(userId) {
   const userEnrollments = enrollments.filter(
     (enrollment) => enrollment.user === userId
   );
-  return enrollments;
+  return userEnrollments;
 }
 export function enrollUserInCourse(userId, courseId) {
   const { enrollments } = Database;
